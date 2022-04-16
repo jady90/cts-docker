@@ -25,12 +25,14 @@ public final class ListenerClass implements ITestListener, ISuiteListener {
                 .getAnnotation(FrameworkAnnotation.class).author());
         ExtentReport.addCategory(result.getMethod().getConstructorOrMethod().getMethod()
                 .getAnnotation(FrameworkAnnotation.class).category());
+        System.out.println(result.getMethod().getMethodName() + "--> execution started");
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
         ExtentLogger.passFinalStep(result.getMethod().getMethodName() + " is passed", true);
         ElkUtils.sendDetailsToElk(result.getMethod().getMethodName(), "pass");
+        System.out.println(result.getMethod().getMethodName() + "--> passed");
     }
 
     @Override
@@ -38,11 +40,14 @@ public final class ListenerClass implements ITestListener, ISuiteListener {
         ExtentLogger.fail(result.getMethod().getMethodName() + " is failed", true);
         ExtentLogger.fail(result.getThrowable().toString());
         ElkUtils.sendDetailsToElk(result.getMethod().getMethodName(), "fail");
+        System.out.println(result.getMethod().getMethodName() + "--> failed");
+
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
         ExtentLogger.skip(result.getMethod().getMethodName() + " is skipped");
+        System.out.println(result.getMethod().getMethodName() + "--> skipped");
     }
 
     @Override

@@ -8,22 +8,24 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 
 public final class ExplicitWaitFactory {
 
     public static WebElement performExplicitWait(WaitStrategy waitStrategy, By by){
         WebElement element = null;
         if(waitStrategy == WaitStrategy.CLICKABLE){
-            element = new WebDriverWait(DriverManager.getDriver(), FrameworkConstant
-                    .getExplicitWaitTime()).until(ExpectedConditions.elementToBeClickable(by));
+            element = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(FrameworkConstant
+                    .getExplicitWaitTime())).until(ExpectedConditions.elementToBeClickable(by));
         }
         else if(waitStrategy == WaitStrategy.PRESENT){
-            element = new WebDriverWait(DriverManager.getDriver(), FrameworkConstant
-                    .getExplicitWaitTime()).until(ExpectedConditions.presenceOfElementLocated(by));
+            element = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(FrameworkConstant
+                    .getExplicitWaitTime())).until(ExpectedConditions.presenceOfElementLocated(by));
         }
         else if(waitStrategy == WaitStrategy.VISIBLE){
-            element = new WebDriverWait(DriverManager.getDriver(), FrameworkConstant
-                    .getExplicitWaitTime()).until(ExpectedConditions.visibilityOfElementLocated(by));
+            element = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(FrameworkConstant
+                    .getExplicitWaitTime())).until(ExpectedConditions.visibilityOfElementLocated(by));
         }
         else if(waitStrategy == WaitStrategy.NONE){
             element = DriverManager.getDriver().findElement(by);

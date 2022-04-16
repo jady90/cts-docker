@@ -15,16 +15,19 @@ public class BasePage {
     protected void click(By by, WaitStrategy waitStrategy, String elementName){
         ExplicitWaitFactory.performExplicitWait(waitStrategy, by).click();
         ExtentLogger.pass(elementName + " is clicked", true);
+        System.out.println(elementName + " is clicked");
     }
     protected void sendKeys(By by, WaitStrategy waitStrategy, String value, String elementName){
         ExplicitWaitFactory.performExplicitWait(waitStrategy, by).sendKeys(value);
         ExtentLogger.pass(value + " entered in " + elementName, true);
+        System.out.println(value + " entered in " + elementName);
     }
     protected void selectByValue(By by, WaitStrategy waitStrategy, String value, String elementName){
         WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, by);
         Select select = new Select(element);
         select.selectByValue(value);
         ExtentLogger.pass(value + " selected from " + elementName, true);
+        System.out.println(value + " selected from " + elementName);
     }
     protected boolean isDisplayed(By by, WaitStrategy waitStrategy, String elementName){
         if(ExplicitWaitFactory.performExplicitWait(waitStrategy, by).isDisplayed()) {
